@@ -1,5 +1,6 @@
 const fs = require('fs');
 const fsPromise = require('node:fs/promises');
+const path = require('path');
 
 // Rename Files
 fs.rename('example/rename.js', 'example/fs-module.js', err => {
@@ -8,14 +9,18 @@ fs.rename('example/rename.js', 'example/fs-module.js', err => {
   }
   // done
 });
-
 // fs.rename('currentNamePath', 'changeNamePath', err => {})
+
+
+fs.mkdir(path.join(__dirname, "test"), {}, (err) => {
+  if(err) throw err;
+  console.log('folder created')
+})
 
 fs.open('example/anotherSample.txt', 'w', (err, file) => {
   if(err) console.log(err)
   console.log('saved');
 })
-
 // fs.open('filePath', 'w', (err, file) => {})
 // create new file with writing permisson
 
@@ -29,7 +34,6 @@ async function example() {
   }
 }
 example();
-
 // fs.writeFile('filePath', Content, (err) => {})
 // create new file if doesnt exist, replace with new file if exists
 
@@ -37,7 +41,6 @@ const appendContent = "Another Hello World"
 fs.appendFile('example/sample.txt', appendContent, err => {
   console.log(err)
 })
-
 // fs.appendFile('filePath', appendContent, (err) => {})
 // append content to the existing file, if not exist create new file
 
@@ -47,7 +50,6 @@ fs.readFile('example/sample.txt', 'utf-8', (err, data) => {
   if(err) console.log(err)
   console.log(data)
 })
-
 // fs.readFile('filePath', 'utf-8', (err,data)=>{})
 
 fs.unlink('example/anotherSample.txt', err => {
